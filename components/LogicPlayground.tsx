@@ -39,7 +39,7 @@ const LogicPlayground: React.FC = () => {
             <div className="p-6 md:p-12">
               <h2 className="syne text-3xl md:text-4xl font-bold mb-3 md:mb-4 tracking-tighter uppercase">THE LOGIC <span className="text-indigo-500 underline decoration-indigo-500/30">ENGINE</span></h2>
               <p className="text-slate-500 mb-6 md:mb-8 mono text-[10px] md:text-sm font-bold tracking-tight uppercase">
-                > INPUT_PROMPT_HERE:
+                {">"} INPUT_PROMPT_HERE:
               </p>
 
               <div className="space-y-4 md:space-y-6">
