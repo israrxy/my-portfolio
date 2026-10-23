@@ -26,15 +26,37 @@ const Footer: React.FC<FooterProps> = ({ onOpenAppsStore }) => {
 
           <div className="flex flex-col md:items-end gap-8 w-full md:w-auto">
             <div className="grid grid-cols-2 sm:flex sm:flex-row flex-wrap gap-x-8 gap-y-4 text-xs sm:text-sm font-bold mono text-slate-400">
-              <button
-                type="button"
-                onClick={() => onOpenAppsStore(null)}
+              <a
+                href="/apps"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenAppsStore(null);
+                }}
                 className="hover:text-indigo-400 min-h-[36px] flex items-center text-left"
               >
                 Apps Store
-              </button>
+              </a>
+              <a
+                href="/apps/raazi"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenAppsStore('raazi');
+                }}
+                className="hover:text-indigo-400 min-h-[36px] flex items-center text-left"
+              >
+                Raazi Store Page
+              </a>
+              <a
+                href="/apps/zenim"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenAppsStore('zenim');
+                }}
+                className="hover:text-rose-400 min-h-[36px] flex items-center text-left"
+              >
+                Zenim Store Page
+              </a>
               <a href="https://github.com/israrxy" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 min-h-[36px] flex items-center">GitHub</a>
-              <a href="https://github.com/israrxy/zenim-android" target="_blank" rel="noopener noreferrer" className="hover:text-rose-400 min-h-[36px] flex items-center">Zenim Android</a>
               <a href="https://raazi-music-player.en.uptodown.com/android" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 min-h-[36px] flex items-center">Raazi (Uptodown)</a>
               <a href="https://raazi.pages.dev" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 min-h-[36px] flex items-center">Raazi Direct</a>
               <a href="https://instagram.com/israrxy" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 min-h-[36px] flex items-center">Instagram</a>

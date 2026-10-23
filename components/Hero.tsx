@@ -45,16 +45,19 @@ const Hero: React.FC<HeroProps> = ({ onOpenAppsStore }) => {
 
             {/* Mobile-First Quick Action Bar */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button 
-                type="button"
-                onClick={() => onOpenAppsStore(null)}
+              <a 
+                href="/apps"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenAppsStore(null);
+                }}
                 className="min-h-[44px] px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 whitespace-nowrap shrink-0 shadow-lg shadow-indigo-600/20"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round">
                   <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>
                 </svg>
                 <span>Open Apps Store</span>
-              </button>
+              </a>
               <a 
                 href="#projects" 
                 className="min-h-[44px] px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 whitespace-nowrap shrink-0"
@@ -92,13 +95,27 @@ const Hero: React.FC<HeroProps> = ({ onOpenAppsStore }) => {
           <div className="flex flex-col gap-1 border-t border-white/5 pt-4 sm:border-none sm:pt-0">
             <span className="mono text-xs text-slate-500">03. Flagship Releases</span>
             <div className="flex items-center gap-2 text-lg md:text-xl font-semibold tracking-tight">
-              <button type="button" onClick={() => onOpenAppsStore('raazi')} className="text-indigo-400 hover:underline">
+              <a
+                href="/apps/raazi"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenAppsStore('raazi');
+                }}
+                className="text-indigo-400 hover:underline"
+              >
                 Raazi v6.0.0
-              </button>
+              </a>
               <span className="text-slate-600">·</span>
-              <button type="button" onClick={() => onOpenAppsStore('zenim')} className="text-rose-400 hover:underline">
+              <a
+                href="/apps/zenim"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenAppsStore('zenim');
+                }}
+                className="text-rose-400 hover:underline"
+              >
                 Zenim v1.1.0
-              </button>
+              </a>
             </div>
           </div>
         </div>

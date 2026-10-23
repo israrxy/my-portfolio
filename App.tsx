@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Philosophy from './components/Philosophy';
@@ -8,13 +8,88 @@ import LogicPlayground from './components/LogicPlayground';
 import Footer from './components/Footer';
 import MobileAppsStore from './components/MobileAppsStore';
 
+const parseRouteFromLocation = (): {
+  mode: 'portfolio' | 'apps';
+  app: 'zenim' | 'raazi' | null;
+  searchQuery: string;
+} => {
+  if (typeof window === 'undefined') {
+    return { mode: 'portfolio', app: null, searchQuery: '' };
+  }
+  const path = window.location.pathname.toLowerCase();
+  const params = new URLSearchParams(window.location.search);
+  const hash = window.location.hash.toLowerCase();
+  const q = params.get('q') || '';
+
+  if (path.includes('/apps/raazi') || params.get('app') === 'raazi' || hash === '#apps/raazi') {
+    return { mode: 'apps', app: 'raazi', searchQuery: q };
+  }
+  if (path.includes('/apps/zenim') || params.get('app') === 'zenim' || hash === '#apps/zenim') {
+    return { mode: 'apps', app: 'zenim', searchQuery: q };
+  }
+  if (path.startsWith('/apps') || params.get('view') === 'apps' || hash === '#apps' || q) {
+    return { mode: 'apps', app: null, searchQuery: q };
+  }
+  return { mode: 'portfolio', app: null, searchQuery: '' };
+};
+
 const App: React.FC = () => {
-  const [viewMode, setViewMode] = useState<'portfolio' | 'apps'>('portfolio');
-  const [initialStoreApp, setInitialStoreApp] = useState<'zenim' | 'raazi' | null>(null);
+  const initialRoute = parseRouteFromLocation();
+  const [viewMode, setViewMode] = useState<'portfolio' | 'apps'>(initialRoute.mode);
+  const [initialStoreApp, setInitialStoreApp] = useState<'zenim' | 'raazi' | null>(initialRoute.app);
+  const [initialSearchQuery, setInitialSearchQuery] = useState<string>(initialRoute.searchQuery);
+
+  // Sync browser URL & SEO title/canonical for Google Sitelinks
+  useEffect(() => {
+    const handlePopState = () => {
+      const route = parseRouteFromLocation();
+      setViewMode(route.mode);
+      setInitialStoreApp(route.app);
+      setInitialSearchQuery(route.searchQuery);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    const canonicalEl = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (viewMode === 'apps') {
+      if (initialStoreApp === 'raazi') {
+        document.title = "Raazi Music Player (v6.0.0) — Israr's App Store";
+        if (canonicalEl) canonicalEl.href = 'https://israrxy.qzz.io/apps/raazi';
+      } else if (initialStoreApp === 'zenim') {
+        document.title = "Zenim Android (v1.1.0) — Israr's App Store";
+        if (canonicalEl) canonicalEl.href = 'https://israrxy.qzz.io/apps/zenim';
+      } else {
+        document.title = "Israr's App Store — Official Android Releases (Raazi & Zenim)";
+        if (canonicalEl) canonicalEl.href = 'https://israrxy.qzz.io/apps';
+      }
+    } else {
+      document.title = "Israr's Portfolio - Logic Architect";
+      if (canonicalEl) canonicalEl.href = 'https://israrxy.qzz.io/';
+    }
+  }, [viewMode, initialStoreApp]);
 
   const openAppsStore = (app: 'zenim' | 'raazi' | null = null) => {
     setInitialStoreApp(app);
     setViewMode('apps');
+    const targetUrl = app ? `/apps/${app}` : '/apps';
+    try {
+      window.history.pushState({ mode: 'apps', app }, '', targetUrl);
+    } catch {
+      // Fallback if history pushState is restricted in iframe
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openPortfolio = () => {
+    setViewMode('portfolio');
+    setInitialStoreApp(null);
+    try {
+      window.history.pushState({ mode: 'portfolio', app: null }, '', '/');
+    } catch {
+      // Fallback if history pushState is restricted in iframe
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -36,17 +111,16 @@ const App: React.FC = () => {
             if (mode === 'apps') {
               openAppsStore(null);
             } else {
-              setViewMode('portfolio');
+              openPortfolio();
             }
           }} 
         />
         {viewMode === 'apps' ? (
           <MobileAppsStore 
             initialApp={initialStoreApp}
-            onBackToPortfolio={() => {
-              setViewMode('portfolio');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }} 
+            initialSearch={initialSearchQuery}
+            onSelectApp={(app) => openAppsStore(app)}
+            onBackToPortfolio={openPortfolio} 
           />
         ) : (
           <main>
@@ -64,4 +138,5 @@ const App: React.FC = () => {
 };
 
 export default App;
+
 

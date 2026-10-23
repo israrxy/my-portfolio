@@ -37,7 +37,7 @@
     <meta name="twitter:description" content="Official portfolio & Android app store of Md Israr Ahamed (israrxy), creator of Raazi Music Player & Zenim Android.">
     <meta name="twitter:image" content="https://israrxy.qzz.io/images/android-chrome-512x512.png">
 
-    <!-- Schema.org Structured Data (JSON-LD) for Google Rich Search Results -->
+    <!-- Schema.org Structured Data (JSON-LD) for Google Sitelinks & Rich Search Results -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -47,11 +47,85 @@
           "@id": "https://israrxy.qzz.io/#website",
           "url": "https://israrxy.qzz.io/",
           "name": "Israr's Portfolio - Logic Architect",
-          "alternateName": ["Israr Ahamed", "israrxy"],
-          "description": "Official portfolio and Android app hub of Md Israr Ahamed (israrxy), creator of Raazi Music Player and Zenim Android.",
+          "alternateName": ["Israr Ahamed", "israrxy", "Israr App Store"],
+          "description": "Official portfolio and Android App Store of Md Israr Ahamed (israrxy), creator of Raazi Music Player and Zenim Android.",
           "publisher": {
             "@id": "https://israrxy.qzz.io/#person"
+          },
+          "hasPart": [
+            {
+              "@id": "https://israrxy.qzz.io/apps#appstore"
+            },
+            {
+              "@id": "https://israrxy.qzz.io/apps/raazi#app"
+            },
+            {
+              "@id": "https://israrxy.qzz.io/apps/zenim#app"
+            }
+          ],
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://israrxy.qzz.io/apps?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
           }
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": "https://israrxy.qzz.io/apps#appstore",
+          "url": "https://israrxy.qzz.io/apps",
+          "name": "Israr's App Store — Official Android Releases",
+          "description": "Download official, ad-free Android APKs by Md Israr Ahamed including Raazi Music Player (v6.0.0) and Zenim Torrent Streamer (v1.1.0).",
+          "isPartOf": {
+            "@id": "https://israrxy.qzz.io/#website"
+          },
+          "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Raazi Music Player",
+                "url": "https://israrxy.qzz.io/apps/raazi"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Zenim Android",
+                "url": "https://israrxy.qzz.io/apps/zenim"
+              }
+            ]
+          }
+        },
+        {
+          "@type": "ItemList",
+          "@id": "https://israrxy.qzz.io/#navigation",
+          "name": "Main Site Navigation",
+          "itemListElement": [
+            {
+              "@type": "SiteNavigationElement",
+              "position": 1,
+              "name": "Israr's App Store",
+              "description": "Browse and download official Android apps by Israr Ahamed (Raazi Music & Zenim Android).",
+              "url": "https://israrxy.qzz.io/apps"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 2,
+              "name": "Raazi Music Player (v6.0.0)",
+              "description": "Ad-free YouTube Music, SoundCloud & Bandcamp player for Android.",
+              "url": "https://israrxy.qzz.io/apps/raazi"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 3,
+              "name": "Zenim Torrent Streamer (v1.1.0)",
+              "description": "Material 3 Expressive torrent client for Android — search, download & stream in-app.",
+              "url": "https://israrxy.qzz.io/apps/zenim"
+            }
+          ]
         },
         {
           "@type": "Person",
@@ -70,12 +144,15 @@
           "sameAs": [
             "https://github.com/israrxy",
             "https://instagram.com/israrxy",
-            "https://raazi.pages.dev"
+            "https://raazi.pages.dev",
+            "https://raazi-music-player.en.uptodown.com/android"
           ]
         },
         {
           "@type": "SoftwareApplication",
+          "@id": "https://israrxy.qzz.io/apps/raazi#app",
           "name": "Raazi Music Player",
+          "url": "https://israrxy.qzz.io/apps/raazi",
           "operatingSystem": "Android 8.0+",
           "applicationCategory": "MultimediaApplication",
           "softwareVersion": "6.0.0",
@@ -94,7 +171,9 @@
         },
         {
           "@type": "SoftwareApplication",
+          "@id": "https://israrxy.qzz.io/apps/zenim#app",
           "name": "Zenim Android",
+          "url": "https://israrxy.qzz.io/apps/zenim",
           "operatingSystem": "Android 7.0+",
           "applicationCategory": "MultimediaApplication",
           "softwareVersion": "1.1.0",

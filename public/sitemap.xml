@@ -6,4 +6,22 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://israrxy.qzz.io/apps</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://israrxy.qzz.io/apps/raazi</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://israrxy.qzz.io/apps/zenim</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

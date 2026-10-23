@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 interface MobileAppsStoreProps {
   onBackToPortfolio: () => void;
   initialApp?: 'zenim' | 'raazi' | null;
+  initialSearch?: string;
+  onSelectApp?: (app: 'zenim' | 'raazi' | null) => void;
 }
 
 type AppId = 'zenim' | 'raazi';
@@ -210,7 +212,7 @@ const MobileAppsStore: React.FC<MobileAppsStoreProps> = ({ onBackToPortfolio, in
           <div className="max-w-4xl mx-auto flex items-center justify-between gap-3">
             <button
               type="button"
-              onClick={() => setSelectedApp(null)}
+              onClick={() => handleChooseApp(null)}
               className="min-h-[44px] px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center gap-2 text-xs font-mono font-bold text-slate-200 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -587,7 +589,7 @@ const MobileAppsStore: React.FC<MobileAppsStoreProps> = ({ onBackToPortfolio, in
           {/* Raazi Featured Banner */}
           {(categoryFilter === 'all' || categoryFilter === 'music') && (
             <div
-              onClick={() => setSelectedApp('raazi')}
+              onClick={() => handleChooseApp('raazi')}
               className="cursor-pointer group rounded-3xl bg-gradient-to-br from-indigo-950/80 via-[#131624] to-[#0f1016] border border-indigo-500/30 p-5 sm:p-6 flex flex-col justify-between hover:border-indigo-400 transition-all"
             >
               <div>

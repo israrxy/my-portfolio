@@ -81,13 +81,16 @@ const Header: React.FC<HeaderProps> = ({ viewMode, onSelectViewMode }) => {
             >
               Drops
             </a>
-            <button
-              type="button"
-              onClick={() => onSelectViewMode('apps')}
+            <a
+              href="/apps"
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectViewMode('apps');
+              }}
               className={`hover:text-white transition-colors uppercase whitespace-nowrap shrink-0 ${viewMode === 'apps' ? 'text-indigo-400 underline underline-offset-4' : ''}`}
             >
               App Store
-            </button>
+            </a>
             <a 
               href="#skills" 
               onClick={() => handlePortfolioNav('skills')}
@@ -106,9 +109,12 @@ const Header: React.FC<HeaderProps> = ({ viewMode, onSelectViewMode }) => {
 
           {/* Zone 3: Primary Action */}
           <div className="flex items-center gap-2.5 shrink-0">
-            <button
-              type="button"
-              onClick={() => onSelectViewMode(viewMode === 'apps' ? 'portfolio' : 'apps')}
+            <a
+              href={viewMode === 'apps' ? '/' : '/apps'}
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectViewMode(viewMode === 'apps' ? 'portfolio' : 'apps');
+              }}
               className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-2 whitespace-nowrap shrink-0 ${
                 viewMode === 'apps'
                   ? 'bg-indigo-600 text-white'
@@ -119,7 +125,7 @@ const Header: React.FC<HeaderProps> = ({ viewMode, onSelectViewMode }) => {
                 <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>
               </svg>
               <span>{viewMode === 'apps' ? 'Portfolio View' : 'Apps Store'}</span>
-            </button>
+            </a>
           </div>
         </nav>
       </header>
@@ -143,9 +149,12 @@ const Header: React.FC<HeaderProps> = ({ viewMode, onSelectViewMode }) => {
             <span className="text-[10px] font-mono font-bold tracking-tight mt-0.5 whitespace-nowrap">Home</span>
           </a>
 
-          <button 
-            type="button"
-            onClick={() => onSelectViewMode('apps')}
+          <a 
+            href="/apps"
+            onClick={(e) => {
+              e.preventDefault();
+              onSelectViewMode('apps');
+            }}
             className={`flex flex-col items-center justify-center min-h-[44px] transition-colors ${viewMode === 'apps' ? 'text-indigo-400' : 'text-slate-400 hover:text-white'}`}
           >
             <div className={`px-3 py-0.5 rounded-full transition-colors ${viewMode === 'apps' ? 'bg-indigo-500/20' : ''}`}>
@@ -154,7 +163,7 @@ const Header: React.FC<HeaderProps> = ({ viewMode, onSelectViewMode }) => {
               </svg>
             </div>
             <span className="text-[10px] font-mono font-bold tracking-tight mt-0.5 whitespace-nowrap">Apps Store</span>
-          </button>
+          </a>
 
           <a 
             href="#about" 
